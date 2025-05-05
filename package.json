@@ -7,33 +7,30 @@
     "build": "next build",
     "start": "next start",
     "format": "prettier --write \"{app,demo,layout,types}/**/*.{js,ts,tsx,d.ts}\"",
-    "lint": "next lint",
-    "db-push": "npx drizzle-kit push",
-    "db-alldrop": "npx tsx db/query/alldrop.ts"
+    "lint": "next lint"
   },
   "dependencies": {
-    "@libsql/client": "^0.15.4",
+    "@hookform/resolvers": "^5.0.1",
     "@paralleldrive/cuid2": "^2.2.2",
     "@types/node": "20.3.1",
     "@types/react": "18.2.12",
     "@types/react-dom": "18.2.5",
     "chart.js": "4.2.1",
     "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.43.1",
     "next": "13.4.8",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
     "primereact": "10.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "typescript": "5.1.3"
+    "react-hook-form": "^7.56.2",
+    "typescript": "5.1.3",
+    "zod": "^3.24.4"
   },
   "devDependencies": {
-    "drizzle-kit": "^0.31.1",
     "eslint": "8.43.0",
     "eslint-config-next": "13.4.6",
     "prettier": "^2.8.8",
-    "sass": "^1.63.4",
-    "tsx": "^4.19.4"
+    "sass": "^1.63.4"
   }
 }
