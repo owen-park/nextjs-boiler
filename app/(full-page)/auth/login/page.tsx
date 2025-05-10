@@ -11,8 +11,10 @@ import { LayoutContext } from '@/layout/context/layoutcontext';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
 import { LoginForm, LoginSchema } from '@/types/auth.d';
+import { useRouter } from 'next/navigation';
 
 const LoginPage = () => {
+  const router = useRouter();
   const [checked, setChecked] = useState(false);
   const { layoutConfig } = useContext(LayoutContext);
   const toast = useRef<any>(null);
@@ -23,7 +25,21 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (param: LoginForm) => {
-    console.log(param);
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(param),
+    });
+
+    const { status } = await res.json();
+
+    if (status === 'SUCCESS') {
+      router.push('/');
+    } else {
+      toast.current.show({ severity:'error', summary: 'Error', detail:'Login Failed', life: 2000 });
+    }
   };
 
   return (
@@ -81,7 +97,7 @@ const LoginPage = () => {
                 />
                 <div className="flex align-items-center justify-content-between mb-5 gap-5">
                   <div className="flex align-items-center">
-                    <Checkbox inputId="rememberme1" checked={checked} onChange={(e) => setChecked(e.checked ?? false)} className="mr-2" />
+                    <Checkbox inputId="rememberme1" checked={checked} onChange={(e) => setChecked(e.checked ?? false)} className="mr-2" disabled />
                     <label htmlFor="rememberme1">Remember me</label>
                   </div>
                   <a className="font-medium no-underline ml-2 text-right cursor-pointer" style={{ color: 'var(--primary-color)' }}>
