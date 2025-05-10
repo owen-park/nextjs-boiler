@@ -104,3 +104,40 @@ db.prepare(
     );
   `
 ).run();
+
+// 메뉴 테이블
+db.prepare(
+  `
+    DROP TABLE IF EXISTS cmn_menu;
+  `
+).run();
+
+db.prepare(
+  `
+    CREATE TABLE IF NOT EXISTS cmn_menu (
+      menu_code VARCHAR(100) PRIMARY KEY,
+      parent_menu_code VARCHAR(100) NULL,
+      menu_name VARCHAR(100) NOT NULL,
+      menu_url VARCHAR(1000) NULL,
+      menu_icon VARCHAR(100) NULL,
+      menu_level INTEGER NULL,
+      display_seq INTEGER NULL,
+      inactive_yn VARCHAR(1) NOT NULL DEFAULT ('N'),
+      created_by VARCHAR(36) NOT NULL DEFAULT ('00000000-0000-0000-0000-000000000000'),
+      created_at VARCHAR(30) NOT NULL DEFAULT (DATETIME('now', 'localtime')),
+      updated_by VARCHAR(36) NOT NULL DEFAULT ('00000000-0000-0000-0000-000000000000'),
+      updated_at VARCHAR(30) NOT NULL DEFAULT (DATETIME('now', 'localtime'))
+    );
+  `
+).run();
+
+db.prepare(
+  `
+    INSERT INTO cmn_menu (menu_code, menu_name, menu_level, display_seq) VALUES ('HOME', 'Home', 0, 0);
+  `
+).run();
+db.prepare(
+  `
+    INSERT INTO cmn_menu (menu_code, parent_menu_code, menu_name, menu_url, menu_icon, menu_level, display_seq) VALUES ('HOME_DASHBOARD', 'HOME', 'Dashboard', '/', 'pi-home', 1, 0);
+  `
+).run();

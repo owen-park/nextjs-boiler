@@ -104,7 +104,7 @@ export const loginService = async (req: LoginRequest) => {
   }
 };
 
-export const TokenService = async (req: TokenRequest) => {
+export const tokenService = async (req: TokenRequest) => {
   const { refreshToken } = await req.json();
 
   // Refresh token이 없으면 에러 코드 반환
