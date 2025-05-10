@@ -2,25 +2,25 @@ import { Metadata } from 'next';
 import Layout from '../../../fe/layout/layout';
 
 interface AppLayoutProps {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }
 
 export const metadata: Metadata = {
+  title: 'OWEN APP',
+  description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
+  robots: { index: false, follow: false },
+  viewport: { initialScale: 1, width: 'device-width' },
+  openGraph: {
+    type: 'website',
     title: 'OWEN APP',
     description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
-    robots: { index: false, follow: false },
-    viewport: { initialScale: 1, width: 'device-width' },
-    openGraph: {
-        type: 'website',
-        title: 'OWEN APP',
-        description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
-        ttl: 604800
-    },
-    icons: {
-        icon: '/favicon.ico'
-    }
+    ttl: 604800
+  },
+  icons: {
+    icon: '/favicon.ico'
+  }
 };
 
 export default function AppLayout({ children }: AppLayoutProps) {
-    return <Layout>{children}</Layout>;
+  return <Layout>{children}</Layout>;
 }
