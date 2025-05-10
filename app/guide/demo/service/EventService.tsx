@@ -1,4 +1,4 @@
-import { Demo } from '@/types';
+import { Demo } from '@/fe/types';
 
 export const EventService = {
     getEvents() {

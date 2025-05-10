@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import Layout from '../../layout/layout';
+import Layout from '@/fe/layout/layout';
 
 interface AppLayoutProps {
     children: React.ReactNode;
@@ -10,12 +10,6 @@ export const metadata: Metadata = {
     description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
     robots: { index: false, follow: false },
     viewport: { initialScale: 1, width: 'device-width' },
-    openGraph: {
-        type: 'website',
-        title: 'OWEN APP',
-        description: 'The ultimate collection of design-agnostic, flexible and accessible React UI Components.',
-        ttl: 604800
-    },
     icons: {
         icon: '/favicon.ico'
     }

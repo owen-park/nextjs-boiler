@@ -5,13 +5,13 @@ import { Checkbox } from 'primereact/checkbox';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { Toast } from 'primereact/toast';
-import { useForm, Controller } from "react-hook-form";
-import { zodResolver } from '@hookform/resolvers/zod';
-import { LayoutContext } from '@/layout/context/layoutcontext';
 import { InputText } from 'primereact/inputtext';
 import { classNames } from 'primereact/utils';
-import { LoginForm, LoginSchema } from '@/types/auth.d';
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
+import { LayoutContext } from '@/fe/layout/context/layoutcontext';
+import { LoginForm, LoginSchema } from '@/fe/types/auth.d';
 
 const LoginPage = () => {
   const router = useRouter();

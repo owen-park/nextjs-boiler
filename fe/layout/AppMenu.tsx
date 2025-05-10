@@ -3,7 +3,7 @@
 import React from 'react';
 import AppMenuitem from './AppMenuitem';
 import { MenuProvider } from './context/menucontext';
-import { AppMenuItem } from '@/types';
+import { AppMenuItem } from '@/fe/types';
 
 const AppMenu = () => {
     const model: AppMenuItem[] = [

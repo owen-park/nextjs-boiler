@@ -9,7 +9,7 @@ import AppSidebar from './AppSidebar';
 import AppTopbar from './AppTopbar';
 import AppConfig from './AppConfig';
 import { LayoutContext } from './context/layoutcontext';
-import { ChildContainerProps, LayoutState, AppTopbarRef } from '@/types';
+import { ChildContainerProps, LayoutState, AppTopbarRef } from '@/fe/types';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 const Layout = ({ children }: ChildContainerProps) => {
