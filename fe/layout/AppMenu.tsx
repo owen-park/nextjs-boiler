@@ -5,24 +5,18 @@ import AppMenuitem from './AppMenuitem';
 import { MenuProvider } from './context/menucontext';
 import { AppMenuItem } from '@/fe/types';
 import { guideMenu } from './guideMenu';
+import baseFetchApi from '../utils/baseFetchApi';
 
 const AppMenu = () => {
   const [model, setModel] = useState<AppMenuItem[]>([]);
   
   const getMenus = async () => {
-    const res = await fetch('/api/cmn/menu', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    return await res.json();
+    return await baseFetchApi('/api/cmn/menu', { method: 'GET' });
   };
 
   useEffect(() => {
-    getMenus().then(data => {
-      const menus = data.data;
+    getMenus().then(res => {
+      const menus = res.data;
       menus.push(guideMenu);
       setModel(menus);
     });

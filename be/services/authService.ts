@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
-import { SignJWT, jwtVerify } from 'jose';
+import { revalidateTag } from 'next/cache';
 import { LoginRequest, TokenRequest } from "@/be/types/authType";
 import { getUser, getPassword, getToken, updateToken, insertToken, verifyToken } from "@/be/models/authModel";
+import { createToken } from "@/be/utils/tokenFunction";
 
 export const loginService = async (req: LoginRequest) => {
   const { loginId, password } = await req.json();
@@ -32,17 +33,13 @@ export const loginService = async (req: LoginRequest) => {
     }
 
     // 토큰 생성
-    const secretKey = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY);
-    const accessToken = await new SignJWT({ userId: userId })
-      .setProtectedHeader({ alg: 'HS256' })
-      .setIssuedAt(new Date())
-      .setExpirationTime('30m')
-      .sign(secretKey);
-    const refreshToken = await new SignJWT()
-      .setProtectedHeader({ alg: 'HS256' })
-      .setIssuedAt(new Date())
-      .setExpirationTime('7d')
-      .sign(secretKey);
+    const accessToken = await createToken({ 
+      payload: { userId: userId }, 
+      expirationTime: '30m',
+    });
+    const refreshToken = await createToken({
+      expirationTime: '7d',
+    });
 
     // 토큰 생성 실패 시 에러 응답 반환
     if (!accessToken || !refreshToken) {
@@ -118,11 +115,10 @@ export const tokenService = async (req: TokenRequest) => {
 
   try {
     // Refresh token 검증
-    const secretKey = new TextEncoder().encode(process.env.TOKEN_SECRET_KEY);
-    const jwtVerifyRes = await jwtVerify(refreshToken, secretKey);
+    const verifyRes = await verifyToken(refreshToken);
     
     // Refresh token가 유효하지 않으면 에러 코드 반환
-    if (!jwtVerifyRes) {
+    if (!verifyRes) {
       return NextResponse.json({
         status: 'ERROR',
         message: 'Refresh token is invalid',

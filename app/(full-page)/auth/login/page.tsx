@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { LayoutContext } from '@/fe/layout/context/layoutcontext';
 import { LoginForm, LoginSchema } from '@/fe/types/auth.d';
+import baseFetchApi from '@/fe/utils/baseFetchApi';
 
 const LoginPage = () => {
   const router = useRouter();
@@ -25,17 +26,12 @@ const LoginPage = () => {
   });
 
   const onSubmit = async (param: LoginForm) => {
-    const res = await fetch('/api/auth/login', {
+    const res = await baseFetchApi('/api/auth/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(param),
+      body: param,
     });
 
-    const { status } = await res.json();
-
-    if (status === 'SUCCESS') {
+    if (res.status === 'SUCCESS') {
       router.push('/');
     } else {
       toast.current.show({ severity:'error', summary: 'Error', detail:'Login Failed', life: 2000 });
