@@ -14,7 +14,8 @@ export type UserResponse = {
 };
 
 export type PasswordResponse = {
-  password_id: string;
+  user_password: string;
+  password_salt: string;
 };
 
 export type TokenResponse = {

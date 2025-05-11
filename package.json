@@ -19,6 +19,7 @@
     "@types/react-dom": "18.2.5",
     "better-sqlite3": "^11.9.1",
     "chart.js": "4.2.1",
+    "crypto": "^1.0.1",
     "dotenv": "^16.5.0",
     "jose": "^6.0.11",
     "next": "13.4.8",

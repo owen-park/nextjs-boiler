@@ -24,26 +24,26 @@ export const getUser = async (loginId: string) => {
   }
 };
 
-export const getPassword = async (loginId: string, password: string) => {
+export const getPassword = async (loginId: string) => {
   try {
     const res = await db.prepare(
       `
-        SELECT cp.password_id
+        SELECT cp.user_password,
+        cp.password_salt
         FROM cmn_password cp
         INNER JOIN cmn_user cu
         ON cp.user_id = cu.user_id
         WHERE 1 = 1
-        AND cp.user_password = ?
         AND cu.login_id = ?
         ;
       `
-    ).get(password, loginId) as PasswordResponse;
+    ).get(loginId) as PasswordResponse;
 
     if (!res) {
       return null;
     }
 
-    return res.password_id;
+    return res;
   } catch {
     return null;
   }
